@@ -116,7 +116,7 @@ public class LinkedList
         } else {
             while (node != null) {
                 if (node == _nodeAfter) {
-                    Node node2 = node.next.next;
+                    Node node2 = node.next;
                     node.next = _nodeToInsert;
                     node.next.next = node2;
                     break;
