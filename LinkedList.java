@@ -44,35 +44,35 @@ public class LinkedList
         return nodes;
     }
 
-    public boolean remove(int _value)
-    {
-        boolean res = false;
+    public boolean remove(int _value) {
+
+        if (this.find(_value) == null) {
+            return false;
+        }
+
         Node node = this.head;
-        if (node != null) {
-            if (node.value == _value) {
-                if (this.count() == 1) {
-                    this.head = null;
-                    this.tail = null;
-                } else {
-                    this.head = node.next;
-                }
-                res = true;
+
+        if (this.find(_value) == node) {
+            if (node == this.tail) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                this.head = node.next;
             }
+            return true;
         }
-        if (res == false) {
-            while (node != null) {
-                if (node.next == null) {
-                    break;
-                }
-                if (node.next.value == _value) {
-                    node.next = node.next.next;
-                    res = true;
-                    break;
-                }
-                node = node.next;
+
+        while (node.next != this.tail) {
+            if (node.next.value == _value) {
+                node.next = node.next.next;
+                return true;
             }
+            node = node.next;
         }
-        return res;
+
+        node.next = null;
+        this.tail = node;
+        return true;
     }
 
     public void removeAll(int _value) {
