@@ -101,18 +101,17 @@ public class LinkedList
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
     {
-        Node node = this.head;
         if (_nodeAfter == null) {
             this.head = _nodeToInsert;
-            this.head.next = node;
-        } else while (node != null) {
-            if (node == _nodeAfter) {
-                Node node2 = node.next;
-                node.next = _nodeToInsert;
-                _nodeToInsert.next = node2;
-                break;
+        } else {
+            Node node = this.head;
+            while (node != null) {
+                if (node == _nodeAfter) {
+                    node.next = _nodeToInsert;
+                    break;
+                }
+                node = node.next;
             }
-            node = node.next;
         }
     }
 
