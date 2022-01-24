@@ -109,6 +109,19 @@ public class LinkedListTest {
             i++;
         }
 
+        // Проверяем удаление из хвоста для непустого списка
+        i = 0;
+        int j = 10;
+        while (i < j) {
+            S.addInTail(new Node(6));
+            i++;
+        }
+        S.removeAll(6);
+        Assert.assertEquals(S.count(), 100);
+        Assert.assertNull(S.find(6));
+        Assert.assertNotNull(S.head);
+        Assert.assertNotNull(S.tail);
+
         // Проверяем непустой список
         int k = rand.nextInt(5);
         S.removeAll(k);
@@ -203,7 +216,6 @@ public class LinkedListTest {
 
         // возьмем случайный узел, после которого будет вставка
         int k = rand.nextInt(99);
-
         Node n = new Node(0);
         while (i < 100) {
             Node s = new Node(rand.nextInt(5));
