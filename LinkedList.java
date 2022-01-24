@@ -12,6 +12,27 @@ public class LinkedList
         head = null;
         tail = null;
     }
+    /*
+    public void addInTail(Node item) {
+        Node i_c = new Node(item.value);
+        i_c.next = item.next;
+        if (this.head == null) {
+            this.head = i_c;
+        } else {
+            this.tail.next = i_c;
+        }
+        if (i_c.next != null) {
+            Node node = i_c;
+            while (node.next != null) {
+                this.tail = node.next;
+                node = node.next;
+            }
+        } else {
+            this.tail = i_c;
+        }
+    }
+
+     */
 
     public void addInTail(Node item) {
         if (this.head == null) {
@@ -101,24 +122,24 @@ public class LinkedList
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert)
     {
-        Node ins_copy = new Node(_nodeToInsert.value);
         Node node = this.head;
         if (_nodeAfter == null) {
             if (this.head == null && this.tail == null) {
-                this.head = ins_copy;
-                this.tail = ins_copy;
-                this.head.next = null;
-                this.tail.next = null;
+                this.addInTail(_nodeToInsert);
             } else {
-                this.head = ins_copy;
-                this.head.next = node;
+                _nodeToInsert.next = node.next;
+                this.head = _nodeToInsert;
             }
         } else {
             while (node != null) {
                 if (node == _nodeAfter) {
-                    Node node2 = node.next;
-                    node.next = ins_copy;
-                    node.next.next = node2;
+                    if (node == this.tail) {
+                        this.addInTail(_nodeToInsert);
+                    } else {
+                        Node node2 = node.next;
+                        node.next = _nodeToInsert;
+                        _nodeToInsert.next = node2;
+                    }
                     break;
                 }
                 node = node.next;
