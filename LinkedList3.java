@@ -14,7 +14,6 @@ public class LinkedList3 extends LinkedList2 {
         tail.prev = head;
         head.prev = null;
         tail.next = null;
-        //return head;
     }
     public void addInTail(Node _item) {
         if (head.next == tail) {
@@ -26,15 +25,6 @@ public class LinkedList3 extends LinkedList2 {
         }
         _item.next = this.tail;
         this.tail.prev = _item;
-        System.out.println(_item.next == this.tail);
-        System.out.println(_item == this.tail.prev);
-        /*
-
-        System.out.println(_item.prev == this.head);
-
-        System.out.println(_item == this.head.next);
-
-         */
     }
     public void printList() {
         Node node = this.head.next;
