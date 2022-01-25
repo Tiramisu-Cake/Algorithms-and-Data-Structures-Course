@@ -78,6 +78,7 @@ public class DynArrayTest {
         A.remove(rand.nextInt(100));
         Assert.assertEquals(99,A.count);
         Assert.assertEquals(buff,A.capacity);
+        Assert.assertTrue(A.capacity >= 16);
 
 
         // удаление элемента, когда в результате понижается размер буфера
@@ -94,10 +95,11 @@ public class DynArrayTest {
         Assert.assertEquals(85,A.count);
         int new_buff = (int) ((buff * 1.0)/1.5);
         Assert.assertEquals(new_buff, A.capacity);
+        Assert.assertTrue(A.capacity >= 16);
     }
 
     @Test
-    // Попытка вставки элемента в недопустимую позицию
+    // Попытка удаления элемента в недопустимой позиции
     public void removeIllegalArgumentTest() throws IllegalArgumentException {
         // Тестовые данные
         A = new DynArray<Integer>(Integer.class);
@@ -109,6 +111,9 @@ public class DynArrayTest {
             Assert.fail("Expected exception!");
         } catch (IllegalArgumentException thrown) {
             Assert.assertNotEquals("", thrown.getMessage());
+        }
+        finally {
+            Assert.assertTrue(A.capacity >= 16);
         }
     }
 }

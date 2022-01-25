@@ -53,7 +53,7 @@ public class DynArray<T>
 
     public void append(T itm)
     {
-        if (capacity < count + 1) {
+        if (capacity == count) {
             this.makeArray(2 * capacity);
         }
         this.array[count] = itm;
@@ -68,12 +68,11 @@ public class DynArray<T>
         if (capacity == count) {
             this.makeArray(2 * capacity);
         }
-        for (int i = count - 1; i > index; i--) {
+        for (int i = count; i > index; i--) {
             array[i] = array[i-1];
         }
         array[index] = itm;
         count++;
-        //O(n)
     }
 
     public void remove(int index)
@@ -87,10 +86,12 @@ public class DynArray<T>
         }
         count--;
         int new_capacity = (int) ((capacity * 1.0)/1.5);
+        if (new_capacity < 16) {
+            new_capacity = 16;
+        }
         if (count <= new_capacity) {
             this.makeArray(new_capacity);
         }
-        //O(n)
     }
 
 }
