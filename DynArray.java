@@ -81,9 +81,10 @@ public class DynArray<T>
             throw new IllegalArgumentException("Illegal Argument: " + index);
         }
 
-        for (int i = index; i < count; i++) {
+        for (int i = index; i < count - 1; i++) {
             array[i] = array[i+1];
         }
+        array[count - 1] = null;
         count--;
         int new_capacity = (int) ((capacity * 1.0)/1.5);
         if (new_capacity < 16) {
