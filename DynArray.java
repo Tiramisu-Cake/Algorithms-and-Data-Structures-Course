@@ -90,7 +90,7 @@ public class DynArray<T>
         if (new_capacity < 16) {
             new_capacity = 16;
         }
-        if (count <= new_capacity) {
+        if (count < (capacity * 1.0)/2) {
             this.makeArray(new_capacity);
         }
     }

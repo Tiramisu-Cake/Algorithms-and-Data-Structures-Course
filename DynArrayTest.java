@@ -84,15 +84,16 @@ public class DynArrayTest {
         // удаление элемента, когда в результате понижается размер буфера
         // проверяем также корректное изменение размера буфера
         A = new DynArray<Integer>(Integer.class);
-        for (int i = 0; i < 86; i++) {
+        for (int i = 0; i < 64; i++) {
             A.append(rand.nextInt());
         }
-        buff = A.capacity; // 128
-        A_length = A.count; // 86
+        A.capacity = 131;
+        buff = A.capacity; // 131
+        A_length = A.count; // 64
 
         // Тест
-        A.remove(rand.nextInt(100));
-        Assert.assertEquals(85,A.count);
+        A.remove(rand.nextInt(64));
+        Assert.assertEquals(63,A.count);
         int new_buff = (int) ((buff * 1.0)/1.5);
         Assert.assertEquals(new_buff, A.capacity);
         Assert.assertTrue(A.capacity >= 16);
