@@ -13,6 +13,12 @@ public class Deque<T>
 
     public void addFront(T item)
     {
+        S1.push(item);
+
+    }
+
+    public void addTail(T item)
+    {
         if (S1.size() == 0) {
             S1.push(item);
         } else {
@@ -20,25 +26,31 @@ public class Deque<T>
         }
     }
 
-    public void addTail(T item)
+    public T removeFront()
     {
-        S1.push(item);
+        if (S1.size() == 0) { // если голова пуста, то брать нечего
+            return null;
+        }
+        T res = (T) S1.pop(); // берем элемент из головы, результат метода
+        while (S2.size() > 0) {
+            S1.push(S2.pop()); // перемещаем все в первый стек
+        }
+        T head = (T) S1.pop(); // последний перемещенный будет новой головой
+        if (head != null) { // если она не пуста
+            while (S1.size() > 0) {
+                S2.push(S1.pop()); // то перемещаем все назад
+            }
+            S1.push(head); // кроме головы
+        }
+        return res;
     }
 
-    public T removeFront()
+    public T removeTail()
     {
         if (S2.size() == 0) {
             return (T) S1.pop();
         }
         return (T) S2.pop();
-    }
-
-    public T removeTail()
-    {
-        if (S1.size() == 0) {
-            return (T) S2.pop();
-        }
-        return (T) S1.pop();
     }
 
     public int size()
