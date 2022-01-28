@@ -5,33 +5,33 @@ public class Queue2<T> {
 
     public Queue2()
     {
-        S1 = new Stack();
-        S2 = new Stack();
+        S1 = new Stack(); // хранит только голову (то, что выйдет первым)
+        S2 = new Stack(); // хранит всю остальную очередь
     }
 
     public void enqueue(T item)
     {
-        if (S1.size() == 0) {
-            S1.push(item);
+        if (S1.size() == 0) { // если голова пуста
+            S1.push(item); // то добавляем в голову
         } else {
             S2.push(item);
         }
     }
 
     public T dequeue() {
-        if (S1.size() == 0) {
+        if (S1.size() == 0) { // если голова пуста, то брать нечего
             return null;
         }
-        T res = (T) S1.pop();
+        T res = (T) S1.pop(); // берем элемент из головы, результат метода
         while (S2.size() > 0) {
-            S1.push(S2.pop());
+            S1.push(S2.pop()); // перемещаем все в первый стек
         }
-        T head = (T) S1.pop();
-        if (head != null) {
+        T head = (T) S1.pop(); // последний перемещенный будет новой головой
+        if (head != null) { // если она не пуста
             while (S1.size() > 0) {
-                S2.push(S1.pop());
+                S2.push(S1.pop()); // то перемещаем все назад
             }
-            S1.push(head);
+            S1.push(head); // кроме головы
         }
 
         return res;
