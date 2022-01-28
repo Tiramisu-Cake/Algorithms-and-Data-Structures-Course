@@ -41,10 +41,11 @@ public class Task4_5 {
                 S2.push((int) S2.pop() + (int) S2.pop());
             }
             if (operation == '-') {
-                S2.push((int) S2.pop() - (int) S2.pop());
+                S2.push(-1 * ((int) S2.pop() - (int) S2.pop()));
             }
-            if (operation == '+') {
-                S2.push((int) S2.pop() / (int) S2.pop());
+            if (operation == '/') {
+                int x = (int) S2.pop();
+                S2.push((int) S2.pop() / x);
             }
         }
         return (int) S2.pop();
