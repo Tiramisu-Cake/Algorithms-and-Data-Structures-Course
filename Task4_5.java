@@ -6,7 +6,6 @@ public class Task4_5 {
         if (S.length() % 2 != 0) { // если число символов нечетно, то проверять нечего
             return false;
         }
-        boolean res = true; // пустую строку считаем сбалансированной
         Stack<Character> Stack = new Stack();
         for (int i = 0; i < S.length(); i++) { // идем по строке сначала
             if (S.charAt(i) == Character.valueOf('(')) {
@@ -15,12 +14,16 @@ public class Task4_5 {
                 // если стек не пуст, то мы проверкой условия удаляем соответсвующую открывающую скобку:
                 if (Stack.pop() == null) {
                     // если он пуст, то у закрывающей скобки не нашлось той, которая ее открывает
-                    res = false;
+                    Stack.push(S.charAt(i));
                     break;
                 }
             }
         }
-        return res;
+        // Если скобки сбалансированны, то стек должен пуст:
+        if (Stack.size() > 0 && S.length() != 0) {
+            return false;
+        }
+        return true;
     }
 
     // Вычисление выражения в стеке
@@ -36,6 +39,12 @@ public class Task4_5 {
             }
             if (operation == '+') {
                 S2.push((int) S2.pop() + (int) S2.pop());
+            }
+            if (operation == '-') {
+                S2.push((int) S2.pop() - (int) S2.pop());
+            }
+            if (operation == '+') {
+                S2.push((int) S2.pop() / (int) S2.pop());
             }
         }
         return (int) S2.pop();
