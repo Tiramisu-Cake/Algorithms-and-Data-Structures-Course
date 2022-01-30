@@ -119,6 +119,7 @@ public class OrderedList<T>
         if (node != null) {
             if (this.count == 1) {
                 this.clear(_ascending);
+                return;
             } else if (node == this.head) {
                 this.head.next.prev = null;
                 this.head = this.head.next;
