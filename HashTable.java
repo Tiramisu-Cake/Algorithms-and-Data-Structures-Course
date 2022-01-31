@@ -26,9 +26,6 @@ public class HashTable
     public int seekSlot(String value)
     {
         int ind = this.hashFun(value);
-        if (slots[ind] == null) {
-            return ind;
-        }
         for (int i = ind; i < size; i += step) {
             if (slots[i] == null) {
                 return i;
@@ -54,20 +51,20 @@ public class HashTable
     public int find(String value)
     {
         int ind = hashFun(value);
-        if (slots[ind].equals(value)) {
-            return ind;
-        }
         for (int i = ind; i < size; i += step) {
-            if (slots[i].equals(value)) {
-                return i;
+            if (slots[i] != null) {
+                if (slots[i].equals(value)) {
+                    return i;
+                }
             }
         }
         for (int i = 0; i < ind; i += step) {
-            if (slots[i].equals(value)) {
-                return i;
+            if (slots[i] != null) {
+                if (slots[i].equals(value)) {
+                    return i;
+                }
             }
         }
-
         return -1;
     }
 }
