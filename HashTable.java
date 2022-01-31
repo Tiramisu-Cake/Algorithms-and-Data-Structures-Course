@@ -26,15 +26,19 @@ public class HashTable
     public int seekSlot(String value)
     {
         int ind = this.hashFun(value);
-        for (int i = ind; i < size; i += step) {
-            if (slots[i] == null) {
-                return i;
+        int stp = step;
+        while (stp > 0) {
+            for (int i = ind; i < size; i += stp) {
+                if (slots[i] == null) {
+                    return i;
+                }
             }
-        }
-        for (int i = 0; i < ind; i += step) {
-            if (slots[i] == null) {
-                return i;
+            for (int i = 0; i < ind; i += stp) {
+                if (slots[i] == null) {
+                    return i;
+                }
             }
+            stp--;
         }
         return -1;
     }
@@ -51,19 +55,23 @@ public class HashTable
     public int find(String value)
     {
         int ind = hashFun(value);
-        for (int i = ind; i < size; i += step) {
-            if (slots[i] != null) {
-                if (slots[i].equals(value)) {
-                    return i;
+        int stp = step;
+        while (stp > 0) {
+            for (int i = ind; i < size; i += stp) {
+                if (slots[i] != null) {
+                    if (slots[i].equals(value)) {
+                        return i;
+                    }
                 }
             }
-        }
-        for (int i = 0; i < ind; i += step) {
-            if (slots[i] != null) {
-                if (slots[i].equals(value)) {
-                    return i;
+            for (int i = 0; i < ind; i += stp) {
+                if (slots[i] != null) {
+                    if (slots[i].equals(value)) {
+                        return i;
+                    }
                 }
             }
+            stp--;
         }
         return -1;
     }
