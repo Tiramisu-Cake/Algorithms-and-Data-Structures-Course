@@ -28,7 +28,10 @@ class NativeDictionary<T>
     public boolean isKey(String key)
     {
         int ind = hashFun(key);
-        return slots[ind] != null;
+        if (slots[ind] != null) {
+            return slots[ind].equals(key);
+        }
+        return false;
     }
 
     public void put(String key, T value)
@@ -41,6 +44,11 @@ class NativeDictionary<T>
     public T get(String key)
     {
         int ind = hashFun(key);
-        return values[ind];
+        if (slots[ind] != null) {
+            if (slots[ind].equals(key)) {
+                return values[ind];
+            }
+        }
+        return null;
     }
 }
